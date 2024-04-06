@@ -36,8 +36,6 @@ public class Employee extends Person{
 		this.salaryDetails = new SalaryDetails();
 		this.employmentPeriod = employmentPeriod;
 		this.children = new ArrayList<>();
-
-		salaryDetails.setMonthlySalary(grade, isForeigner);
 	}
 
 	public void setAnnualDeductible(int deductible) {	
@@ -46,6 +44,10 @@ public class Employee extends Person{
 	
 	public void setAdditionalIncome(int income) {	
 		salaryDetails.setOtherMonthlyIncome(income);
+	}
+
+	public void setMonthlySalary(int grade) {
+		salaryDetails.setMonthlySalary(grade, this.isForeigner);
 	}
 	
 	public void setSpouse(Person spouse) {
