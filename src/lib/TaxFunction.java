@@ -1,5 +1,8 @@
 package lib;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public class TaxFunction {
 
 	
@@ -14,6 +17,20 @@ public class TaxFunction {
 	 * 
 	 */
 	
+	public static int getAnnualIncomeTax(int yearJoined, int monthWorkingInYear, int monthJoined, int monthlySalary, int otherMonthlyIncome, int annualDeductible, Person spouse, List<Person> children) {
+
+		// Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah
+		// bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
+		LocalDate date = LocalDate.now();
+
+		if (date.getYear() == yearJoined) {
+			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		} else {
+			monthWorkingInYear = 12;
+		}
+		
+		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouse.getIdNumber().equals(""), children.size());
+	}
 	
 	public static int calculateTax(int monthlySalary, int otherMonthlyIncome, int numberOfMonthWorking, int deductible, boolean isMarried, int numberOfChildren) {
 		
