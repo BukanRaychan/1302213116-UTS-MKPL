@@ -49,6 +49,10 @@ public class Employee extends Person{
 	public void setMonthlySalary(int grade) {
 		salaryDetails.setMonthlySalary(grade, this.isForeigner);
 	}
+
+	public void setWorkingInYear(int monthWorkingInYear) {
+		employmentPeriod.setMonthWorkingInYear(monthWorkingInYear);
+	}
 	
 	public void setSpouse(Person spouse) {
 		this.spouse = spouse;
