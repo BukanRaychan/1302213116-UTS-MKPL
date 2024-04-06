@@ -13,10 +13,7 @@ public class Employee extends Person{
 	private String lastName;
 	private String address;
 
-	private int yearJoined;
-	private int monthJoined;
-	private int dayJoined;
-	private int monthWorkingInYear;
+	private EmploymentPeriod employmentPeriod;
 
 	private boolean isForeigner;
 	private boolean gender; //true = Laki-laki, false = Perempuan
@@ -28,19 +25,17 @@ public class Employee extends Person{
 	private Person spouse;
 	private List<Person> children;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, EmploymentPeriod employmentPeriod, boolean isForeigner, boolean gender) {
 		super(firstName + " " + lastName, idNumber);
 		
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 		
+		this.employmentPeriod = employmentPeriod;
 		children = new ArrayList<>();
 	}
 
