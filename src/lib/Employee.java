@@ -18,14 +18,12 @@ public class Employee extends Person{
 	private boolean isForeigner;
 	private boolean gender; //true = Laki-laki, false = Perempuan
 
-	private int monthlySalary;
-	private int otherMonthlyIncome;
-	private int annualDeductible;
+	private SalaryDetails salaryDetails;
 
 	private Person spouse;
 	private List<Person> children;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, EmploymentPeriod employmentPeriod, boolean isForeigner, boolean gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int grade, EmploymentPeriod employmentPeriod, boolean isForeigner, boolean gender) {
 		super(firstName + " " + lastName, idNumber);
 		
 		this.employeeId = employeeId;
@@ -34,35 +32,20 @@ public class Employee extends Person{
 		this.address = address;
 		this.isForeigner = isForeigner;
 		this.gender = gender;
-		
+
+		this.salaryDetails = new SalaryDetails();
 		this.employmentPeriod = employmentPeriod;
-		children = new ArrayList<>();
+		this.children = new ArrayList<>();
+
+		salaryDetails.setMonthlySalary(grade, isForeigner);
 	}
 
-	/**
-	 * Fungsi untuk menentukan gaji bulanan pegawai berdasarkan grade kepegawaiannya (grade 1: 3.000.000 per bulan, grade 2: 5.000.000 per bulan, grade 3: 7.000.000 per bulan)
-	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
-	 */
-
-	public void setMonthlySalary(int grade) {
-		if (grade == 1) {
-			monthlySalary = 3000000;
-		} else if (grade == 2) {
-			monthlySalary = 5000000;
-		} else if (grade == 3) {
-			monthlySalary = 7000000;
-		}
-		if (isForeigner) {
-			monthlySalary = (int) (monthlySalary * 1.5);
-		}
+	public void setAnnualDeductible(int deductible) {	
+		salaryDetails.setAnnualDeductible(deductible);
 	}
-
-	public void setAnnualDeductible(int deductible) {
-		this.annualDeductible = deductible;
-	}
-
-	public void setAdditionalIncome(int income) {
-		this.otherMonthlyIncome = income;
+	
+	public void setAdditionalIncome(int income) {	
+		salaryDetails.setOtherMonthlyIncome(income);
 	}
 	
 	public void setSpouse(Person spouse) {
@@ -71,5 +54,21 @@ public class Employee extends Person{
 	
 	public void addChild(List<Person> children) {
 		this.children = children;
+	}
+
+	public EmploymentPeriod getEmploymentPeriod() {
+		return employmentPeriod;
+	}
+
+	public SalaryDetails getSalaryDetails() {
+		return salaryDetails;
+	}
+
+	public Person getSpouse() {
+		return spouse;
+	}
+
+	public List<Person> getChildren() {
+		return children;
 	}
 }
